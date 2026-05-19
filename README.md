@@ -6,6 +6,12 @@ A simple shopping application built with **React Native** where users can browse
 This project was designed to demonstrate **navigation**, **API handling**, **Redux state management**, **local persistence**, **search**, **pagination**, and **app lifecycle handling** in a clean, scalable way.
 
 ---
+## Demo Video: 
+https://drive.google.com/file/d/1tj6-mVwwqYob9WoDbgetjEyQ9Emly8h-/view?usp=sharing
+## Deployment link:
+https://drive.google.com/file/d/1PVqCbtC2s4ZVpViFXv0-0-mXvjk3hbT0/view?usp=sharing
+
+---
 ## 🖼️ App Preview
 <img width="300" height="750" alt="Screenshot_20260519_232521" src="https://github.com/user-attachments/assets/408b528c-0920-4faf-bdbc-0baf21a54fad" />
 <img width="300" height="750" alt="Screenshot_20260519_232526" src="https://github.com/user-attachments/assets/9db4dda4-9daa-4308-b77c-416f6b8f39a7" />
