@@ -1,3 +1,4 @@
+
 # 🛍️ React Native Shopping App (Category → Products → Cart)
 
 A simple shopping application built with **React Native** where users can browse product categories, view products, search items, add them to cart, and retain their cart even after the app is closed or restarted.
@@ -5,7 +6,13 @@ A simple shopping application built with **React Native** where users can browse
 This project was designed to demonstrate **navigation**, **API handling**, **Redux state management**, **local persistence**, **search**, **pagination**, and **app lifecycle handling** in a clean, scalable way.
 
 ---
+## 🖼️ App Preview
+<img width="300" height="750" alt="Screenshot_20260519_232521" src="https://github.com/user-attachments/assets/408b528c-0920-4faf-bdbc-0baf21a54fad" />
+<img width="300" height="750" alt="Screenshot_20260519_232526" src="https://github.com/user-attachments/assets/9db4dda4-9daa-4308-b77c-416f6b8f39a7" />
+<img width="300" height="750" alt="Screenshot_20260519_232532" src="https://github.com/user-attachments/assets/a76408db-ee14-47f2-a418-7c5feca980dd" />
+<img width="300" height="750" alt="Screenshot_20260519_232532" src="https://github.com/user-attachments/assets/f161a755-9c4d-4d9a-983d-810d78836a64" />
 
+---
 ## 💠 App Functionality
 
 This app contains three main screens:
