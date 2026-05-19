@@ -1,97 +1,206 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🛍️ React Native Shopping App (Category → Products → Cart)
 
-# Getting Started
+A simple shopping application built with **React Native** where users can browse product categories, view products, search items, add them to cart, and retain their cart even after the app is closed or restarted.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+This project was designed to demonstrate **navigation**, **API handling**, **Redux state management**, **local persistence**, **search**, **pagination**, and **app lifecycle handling** in a clean, scalable way.
 
-## Step 1: Start Metro
+---
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 💠 App Functionality
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+This app contains three main screens:
 
-```sh
-# Using npm
-npm start
+1. **Categories Screen**
 
-# OR using Yarn
-yarn start
+   * Fetches product categories from a public API (https://dummyjson.com)
+   * Displays list of categories (Men, Women, Beauty, etc.)
+   * Navigates to product list on selection
+
+2. **Products Screen**
+
+   * Fetches products based on selected category
+   * Displays large list using `FlatList`
+   * Implements **search** by product title
+   * Implements **infinite scrolling / pagination (After reaching at end it load 10 more product)** 
+   * Allows user to **add products to cart**
+
+3. **Cart Screen**
+
+   * Shows all added items
+   * Displays total price
+   * Cart data persists even the app in background or killed
+
+---
+
+## 🌐 Public API Used
+
+**Fake Store API**
+Base URL: [https://dummyjson.com](https://dummyjson.com)
+
+Used endpoints:
+
+* `/products/category-list`
+* `/products?limit=${limit}&skip=${currentSkip}`
+
+---
+
+## 🧭 Navigation Architecture
+
+Built using **React Navigation** with nested navigation:
+
+* Bottom Tab Navigator
+
+  * Home Stack (Categories → Products)
+  * Cart Screen
+
+This ensures the cart is always accessible.
+
+---
+
+## 🧠 State Management
+
+State is managed using **Redux Toolkit**.
+
+* `cartProduct`
+
+Redux is also hydrated on app start using persisted storage (@react-native-async-storage/async-storage).
+
+---
+
+## 💾 Local Data Persistence & Lifecycle Handling
+
+Implemented using:
+
+* **AsyncStorage**
+* **AppState**
+
+When the app goes to background:
+
+* Redux state is saved to storage
+
+When the app restarts:
+
+* Saved state is restored into Redux
+
+This ensures the cart and data are never lost.
+
+---
+
+## 📁 Folder Structure
+
+```
+  Root/
+     |
+    src/
+     ├── navigation/
+     │     └── Navigation.tsx
+     │
+     ├── screens/
+     │     ├── homeTab/
+     │     |     ├── Home.tsx
+     │     |     └── ProductsScreen.tsx
+     |     |
+     │     └── cartTab/
+     │           ├── CartScreen.tsx
+     │           └── CheckoutScreen.tsx
+     │
+     ├── redux/
+     │     ├── store/
+     │     |     └── store.tsx
+     │     ├── action/
+     │     |     └── action.tsx
+     │     └── reducer/
+     │           └── reducer.tsx
+     │
+     ├── components/
+     │     └── carTab/
+     │     |     └── EmptyCart.tsx
+     │     └── universal/
+     │            └── BackButton.tsx
+     │
+     ├── services/
+     │     ├── apiClient.tsx
+     │     ├── categoryApi.tsx
+     │     └── productApi.tsx
+     │
+     └── utils/
+           └── persistence.tsx
 ```
 
-## Step 2: Build and run your app
+This structure keeps the project clean and scalable.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+---
 
-### Android
+## ▶️ How to Run the Project
 
-```sh
-# Using npm
-npm run android
+1. Clone the repository
 
-# OR using Yarn
-yarn android
+```
+git clone https://github.com/priyamghorui/Educase-India-task_react-native_Megha-Store.git
 ```
 
-### iOS
+2. Install dependencies
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```
+npm install
 ```
 
-Then, and every time you update your native dependencies, run:
+3. Run on Android
 
-```sh
-bundle exec pod install
 ```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+npx run android
 ```
+4. Start Metro bundler
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+```
+npx start
+```
+> Make sure emulator or device is connected.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+---
 
-## Step 3: Modify your app
+## ⚙️ Key Technical Decisions
 
-Now that you have successfully run the app, let's make changes!
+* Used Redux Toolkit for predictable state management
+* Separated API layer using Axios service files
+* Used nested navigation (Tabs + Stack) for better UX
+* Implemented infinite scroll with FlatList for performance
+* All datas are not fetch in one time, we fetch first 10 item then
+    after user reach at end then load more 10 item. It will give less load in API server
+* Implemented search Search functionality without extra API calls
+* Used AsyncStorage + AppState for persistence and lifecycle handling
+* Screen's and other file other file prefectly organized for scalability
+* Organized code inside `src/` for scalability
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+---
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## 🛠️ Improvements With More Time
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+If given more time, I would:
 
-## Congratulations! :tada:
+* Add product detail screen
+* Add animations and better UI polish
+* Add loading skeletons and error handling UI
+* Implement dark mode
+* Implement wishlist
+* Implement Sign In and Sign Up functionality
+* Implement backend for online seller for list item in the app
+* Optimize images and caching
 
-You've successfully run and modified your React Native App. :partying_face:
+---
 
-### Now what?
+## ✅ What This Project Demonstrates
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+This project demonstrates understanding of:
 
-# Troubleshooting
+* Clean project architecture
+* React Native navigation patterns
+* Redux state management
+* API separation and handling
+* Performance with large lists
+* Persistence across app restarts
+* Real-world mobile app lifecycle handling
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+---
 
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+### Thank You.
